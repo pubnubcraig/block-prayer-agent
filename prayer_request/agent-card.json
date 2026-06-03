@@ -15,12 +15,11 @@
     "inputs": [
       {
         "id": "request",
-        "description": "User concern and preferred Bible version.",
+        "description": "User concern, problem, prayer, or topic. Responses always use the American Standard Version (ASV); version selection is disabled for now.",
         "contentType": "application/json",
         "required": true,
         "example": {
-          "text": "I feel anxious about the future and need peace.",
-          "bible_version": "ESV"
+          "text": "I feel anxious about the future and need peace."
         },
         "schema": {
           "type": "object",
@@ -28,13 +27,8 @@
           "properties": {
             "text": {
               "type": "string",
-              "title": "User concern, problem, prayer, or topic"
-            },
-            "bible_version": {
-              "type": "string",
-              "title": "Bible version",
-              "enum": ["ESV", "NIV", "KJV", "NKJV", "NLT", "NASB", "CSB", "NRSV", "MSG", "AMP"],
-              "default": "ESV"
+              "title": "User concern, problem, prayer, or topic",
+              "description": "Responses always use the American Standard Version (ASV). Bible version selection is disabled for now."
             }
           }
         }
