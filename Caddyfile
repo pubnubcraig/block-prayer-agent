@@ -1,0 +1,21 @@
+# Optional HTTPS reverse proxy for a custom domain.
+# 1. Point an A record (e.g. prayer.example.com) at the EC2 Elastic IP.
+# 2. In docker-compose.aws.yml change the web service to NOT publish port 80
+#    (remove the "ports:" block so Caddy owns 80/443), then add this service:
+#
+#   caddy:
+#     image: caddy:2
+#     depends_on: [web]
+#     ports: ["80:80", "443:443"]
+#     volumes:
+#       - ./Caddyfile:/etc/caddy/Caddyfile:ro
+#       - caddy_data:/data
+#       - caddy_config:/config
+#     restart: unless-stopped
+#
+# 3. Replace prayer.example.com below with your domain and redeploy.
+#    Caddy fetches/renews a Let's Encrypt certificate automatically.
+
+prayer.example.com {
+    reverse_proxy web:8080
+}

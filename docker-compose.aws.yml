@@ -1,0 +1,34 @@
+# AWS single-box deployment: always-on Blocks worker + web UI/API.
+# Usage on the EC2 host (repo cloned to /opt/app, secrets in /opt/app/.env):
+#   docker compose -f docker-compose.aws.yml up -d --build
+# To add HTTPS later with a domain, see Caddyfile and DEPLOY.md.
+name: prayer-request
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    image: prayer-request-web:local
+    container_name: prayer-request-web
+    env_file:
+      - .env
+    environment:
+      PORT: 8080
+      PROMPTS_DIR: /app/prompts
+      PUBLIC_DIR: /app/public
+    ports:
+      - "80:8080"
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: ./prayer_request
+      dockerfile: Dockerfile
+    image: prayer-request-worker:local
+    container_name: prayer-request-worker
+    env_file:
+      - .env
+    environment:
+      PROMPTS_DIR: /app/prompts
+    restart: unless-stopped
