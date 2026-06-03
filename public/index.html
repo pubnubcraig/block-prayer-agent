@@ -680,22 +680,6 @@
               ></textarea>
             </div>
 
-            <div class="field">
-              <label for="bible_version">Bible version</label>
-              <select id="bible_version" name="bible_version">
-                  <option value="ESV" selected>ESV</option>
-                  <option value="NIV">NIV</option>
-                  <option value="KJV">KJV</option>
-                  <option value="NKJV">NKJV</option>
-                  <option value="NLT">NLT</option>
-                  <option value="NASB">NASB</option>
-                  <option value="CSB">CSB</option>
-                  <option value="NRSV">NRSV</option>
-                  <option value="MSG">MSG</option>
-                  <option value="AMP">AMP</option>
-                </select>
-            </div>
-
             <div class="actions">
               <button type="submit" id="submit">Receive prayer response</button>
               <div class="status-wrap">
@@ -824,7 +808,6 @@
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const text = document.getElementById('text').value.trim();
-        const bible_version = document.getElementById('bible_version').value;
 
         if (!text) {
           setStatus('Please enter your prayer request.', true, false);
@@ -839,7 +822,7 @@
           const res = await fetch('/api/prayer', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text, bible_version }),
+            body: JSON.stringify({ text, bible_version: 'ASV' }),
           });
 
           const data = await res.json();

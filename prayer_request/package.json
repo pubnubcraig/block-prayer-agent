@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@blocks-network/sdk": "latest",
+    "@blocks-network/sdk": "^0.1.65",
     "@youversion/platform-core": "latest",
     "dotenv": "^16.4.5",
     "openai": "^4.77.0"

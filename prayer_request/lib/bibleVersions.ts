@@ -1,19 +1,8 @@
-export const ALLOWED_BIBLE_VERSIONS = [
-  'ESV',
-  'NIV',
-  'KJV',
-  'NKJV',
-  'NLT',
-  'NASB',
-  'CSB',
-  'NRSV',
-  'MSG',
-  'AMP',
-] as const;
+export const ALLOWED_BIBLE_VERSIONS = ['ASV'] as const;
 
 export type BibleVersionAbbrev = (typeof ALLOWED_BIBLE_VERSIONS)[number];
 
-export const DEFAULT_BIBLE_VERSION: BibleVersionAbbrev = 'ESV';
+export const DEFAULT_BIBLE_VERSION: BibleVersionAbbrev = 'ASV';
 
 export function normalizeBibleVersion(input: unknown): BibleVersionAbbrev {
   const raw = typeof input === 'string' ? input.trim().toUpperCase() : '';
