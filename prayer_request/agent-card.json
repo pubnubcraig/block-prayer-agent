@@ -1,0 +1,91 @@
+{
+  "identity": {
+    "agentName": "prayer_request",
+    "displayName": "Prayer Request",
+    "description": "Bring a concern, problem, topic, or prayer need and receive a relevant Bible verse, Bible.com link, faithful interpretation, practical next steps, and a short prayer grounded in Scripture.",
+    "version": "1.0.0",
+    "provider": {
+      "organization": "prayer_request"
+    }
+  },
+  "capabilities": {
+    "taskKinds": ["request", "pipe"]
+  },
+  "io": {
+    "inputs": [
+      {
+        "id": "request",
+        "description": "User concern and preferred Bible version.",
+        "contentType": "application/json",
+        "required": true,
+        "example": {
+          "text": "I feel anxious about the future and need peace.",
+          "bible_version": "ESV"
+        },
+        "schema": {
+          "type": "object",
+          "required": ["text"],
+          "properties": {
+            "text": {
+              "type": "string",
+              "title": "User concern, problem, prayer, or topic"
+            },
+            "bible_version": {
+              "type": "string",
+              "title": "Bible version",
+              "enum": ["ESV", "NIV", "KJV", "NKJV", "NLT", "NASB", "CSB", "NRSV", "MSG", "AMP"],
+              "default": "ESV"
+            }
+          }
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "id": "result",
+        "description": "Bible verse, link, text, interpretation, advice, and prayer.",
+        "contentType": "application/json",
+        "guaranteed": true,
+        "example": {
+          "bible_verse": "Philippians 4:6-7",
+          "verse_link": "https://www.bible.com/bible/59/PHP.4.6-7.ESV",
+          "verse_content": "do not be anxious about anything, but in everything by prayer and supplication with thanksgiving let your requests be made known to God.",
+          "verse_interpretation": "Paul encourages believers to bring every worry to God in prayer rather than carrying anxiety alone.",
+          "advice": "- Set aside a few minutes today to name your fears before God in prayer.\n- Write down one specific request you can thank God for while you wait.\n- Ask a trusted friend to pray with you this week.",
+          "prayer": "Lord, quiet my anxious heart and teach me to bring every concern to You in prayer. Help me trust Your peace that guards my mind. In Jesus name, Amen."
+        },
+        "schema": {
+          "type": "object",
+          "properties": {
+            "bible_verse": { "type": "string" },
+            "verse_link": { "type": "string" },
+            "verse_content": { "type": "string" },
+            "verse_interpretation": { "type": "string" },
+            "advice": { "type": "string" },
+            "prayer": { "type": "string" },
+            "error": { "type": "string" }
+          }
+        }
+      }
+    ]
+  },
+  "skills": [
+    {
+      "id": "main",
+      "name": "Prayer Request",
+      "description": "Selects a relevant verse and returns interpretation, advice, and prayer.",
+      "examples": [
+        "{\"text\":\"I am struggling with anxiety about my job.\",\"bible_version\":\"ESV\"}",
+        "{\"text\":\"My friend died and I am grieving.\",\"bible_version\":\"ESV\"}",
+        "{\"text\":\"I am grateful for God's blessings this week.\",\"bible_version\":\"ESV\"}"
+      ]
+    }
+  ],
+  "runtime": {
+    "handler": "./handler.ts",
+    "handlerExport": "default",
+    "concurrency": 12,
+    "expectedInstances": 1,
+    "maxRunningTimeSec": 180
+  }
+}

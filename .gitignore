@@ -1,0 +1,9 @@
+.env
+*.env.local
+node_modules/
+**/node_modules/
+plans/
+.DS_Store
+pip.conf
+.npmrc
+.vercel

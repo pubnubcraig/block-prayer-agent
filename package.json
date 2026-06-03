@@ -1,0 +1,13 @@
+{
+  "name": "block-prayer-request",
+  "private": true,
+  "dependencies": {
+    "@youversion/platform-core": "latest",
+    "dotenv": "^16.4.5",
+    "openai": "^4.77.0"
+  },
+  "devDependencies": {
+    "@vercel/node": "^5.1.14",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "@blocks-network/sdk": "latest",
+    "@youversion/platform-core": "latest",
+    "dotenv": "^16.4.5",
+    "openai": "^4.77.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  },
+  "name": "prayer_request",
+  "private": true,
+  "scripts": {
+    "check": "blocks check",
+    "start": "blocks run",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}

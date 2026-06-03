@@ -1,0 +1,19 @@
+# Always-on Blocks Network provider for @prayer_request.
+# Vercel hosts the web UI + HTTP API; Render runs `blocks run` so the agent shows Active on blocks.ai.
+# Connect this repo in Render → New → Blueprint, then set env vars in the dashboard.
+services:
+  - type: worker
+    name: prayer-request-blocks
+    runtime: docker
+    dockerfilePath: ./prayer_request/Dockerfile
+    dockerContext: ./prayer_request
+    plan: free
+    envVars:
+      - key: BLOCKS_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: YOUVERSION_APP_KEY
+        sync: false
+      - key: PROMPTS_DIR
+        value: /app/prompts
